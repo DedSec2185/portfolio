@@ -291,7 +291,7 @@ function AnimatedCounter({ to, pre = "", suf = "", dur = 1800 }) {
   );
 }
 
-/* ─── Section Motion Reveal Wrappers ───────────────────────────────────────── */
+/* ─── Bidirectional Section Motion Reveal Wrappers (With Reverse Scroll) ───── */
 function RevealMotion({ children, motionType = "fadeUp", delay = 0, style = {} }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -299,37 +299,42 @@ function RevealMotion({ children, motionType = "fadeUp", delay = 0, style = {} }
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
+        setVisible(entry.isIntersecting);
       },
-      { threshold: 0.08 }
+      { threshold: 0.08, rootMargin: "-20px 0px -20px 0px" }
     );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    const element = ref.current;
+    if (element) observer.observe(element);
+    return () => {
+      if (element) observer.unobserve(element);
+    };
   }, []);
 
   const motionStyles = {
     fadeUp: {
-      hidden: { opacity: 0, transform: "translateY(36px)" },
-      visible: { opacity: 1, transform: "translateY(0)" },
+      hidden: { opacity: 0, transform: "translateY(40px) scale(0.97)" },
+      visible: { opacity: 1, transform: "translateY(0) scale(1)" },
       transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
     },
     slideLeft: {
-      hidden: { opacity: 0, transform: "translateX(-45px) rotate(-1.5deg)" },
-      visible: { opacity: 1, transform: "translateX(0) rotate(0deg)" },
+      hidden: { opacity: 0, transform: "translateX(-50px) rotate(-1.8deg) scale(0.96)" },
+      visible: { opacity: 1, transform: "translateX(0) rotate(0deg) scale(1)" },
       transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
     },
     slideRight: {
-      hidden: { opacity: 0, transform: "translateX(45px) rotate(1.5deg)" },
-      visible: { opacity: 1, transform: "translateX(0) rotate(0deg)" },
+      hidden: { opacity: 0, transform: "translateX(50px) rotate(1.8deg) scale(0.96)" },
+      visible: { opacity: 1, transform: "translateX(0) rotate(0deg) scale(1)" },
       transition: `opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
     },
     scaleUp: {
-      hidden: { opacity: 0, transform: "scale(0.88)" },
-      visible: { opacity: 1, transform: "scale(1)" },
+      hidden: { opacity: 0, transform: "scale(0.85) translateY(25px)" },
+      visible: { opacity: 1, transform: "scale(1) translateY(0)" },
       transition: `opacity 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms`,
+    },
+    flip3D: {
+      hidden: { opacity: 0, transform: "perspective(800px) rotateX(25deg) translateY(45px)" },
+      visible: { opacity: 1, transform: "perspective(800px) rotateX(0deg) translateY(0)" },
+      transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
     },
   };
 
@@ -341,6 +346,7 @@ function RevealMotion({ children, motionType = "fadeUp", delay = 0, style = {} }
       style={{
         ...(visible ? selected.visible : selected.hidden),
         transition: selected.transition,
+        willChange: "opacity, transform",
         ...style,
       }}
     >
@@ -694,7 +700,7 @@ export default function Portfolio() {
           transition: "all 0.3s ease",
         }}
       >
-        {/* Left: Styled Logo Emblem */}
+        {/* Left: Creative Signature Monogram Logo */}
         <div
           onClick={() => scrollTo("hero")}
           style={{
@@ -707,21 +713,36 @@ export default function Portfolio() {
         >
           <div
             style={{
-              width: 38,
-              height: 38,
-              borderRadius: 10,
-              background: `linear-gradient(135deg, ${C.acc} 0%, ${C.accLight} 100%)`,
+              padding: "6px 14px",
+              borderRadius: 20,
+              background: "rgba(16, 185, 129, 0.1)",
+              border: `1px solid ${C.acc}`,
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 800,
-              fontSize: 16,
-              color: "#090D16",
-              boxShadow: "0 0 16px rgba(16, 185, 129, 0.4)",
-              fontFamily: "'Syne', sans-serif",
+              gap: 8,
+              boxShadow: "0 0 20px rgba(16, 185, 129, 0.25)",
+              transition: "all 0.3s ease",
             }}
           >
-            AS
+            <span
+              style={{
+                fontFamily: "'Space Grotesk', 'Syne', sans-serif",
+                fontSize: 14,
+                fontWeight: 800,
+                color: C.accLight,
+                letterSpacing: 1,
+              }}
+            >
+              AS
+            </span>
+            <span
+              style={{
+                width: 4,
+                height: 4,
+                borderRadius: "50%",
+                background: C.acc,
+              }}
+            />
           </div>
           <div>
             <div
@@ -928,34 +949,16 @@ export default function Portfolio() {
                 {/* Bottom Label Banner */}
                 <div
                   style={{
-                    padding: "16px 20px",
+                    padding: "18px 24px",
                     background: C.sur,
                     borderTop: `1px solid ${C.bor}`,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
                   }}
                 >
-                  <div>
-                    <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 16, fontWeight: 800, color: C.t1 }}>
-                      Abhayraj Singh
-                    </div>
-                    <div style={{ fontSize: 12.5, color: C.accLight, fontWeight: 600, marginTop: 2 }}>
-                      AI Software Engineer @ Reliance Jio
-                    </div>
+                  <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 18, fontWeight: 800, color: C.t1 }}>
+                    Abhayraj Singh
                   </div>
-                  <div
-                    style={{
-                      fontSize: 11.5,
-                      fontWeight: 700,
-                      color: C.t3,
-                      background: C.bg,
-                      padding: "5px 10px",
-                      borderRadius: 6,
-                      border: `1px solid ${C.bor}`,
-                    }}
-                  >
-                    Graduation 2028
+                  <div style={{ fontSize: 13.5, color: C.accLight, fontWeight: 600, marginTop: 3 }}>
+                    AI Software Engineer
                   </div>
                 </div>
               </div>
