@@ -1645,8 +1645,8 @@ export default function Portfolio() {
                   },
                   {
                     label: "LINKEDIN",
-                    val: "abhayraj-singh-91a6b537b",
-                    href: "https://linkedin.com/in/abhayraj-singh-91a6b537b",
+                    val: "abhayraj-singh-b2762b214",
+                    href: "https://www.linkedin.com/in/abhayraj-singh-b2762b214/",
                   },
                   {
                     label: "LOCATION",
