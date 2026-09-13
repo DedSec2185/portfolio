@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 
-/* ─── Color System (High Contrast & Glowing Dark Theme) ─────────────────────── */
+/* ─── Color System (Soothing, Stable & Eye-Catching Emerald Slate Theme) ────── */
 const C = {
-  bg:       "#070913", // Deep midnight obsidian
-  sur:      "#0F1424", // Surface card background
-  surHover: "#161D33", // Hover surface background
-  bor:      "#1E2640", // Border color
-  borLight: "#2E3A5F", // Highlight border
-  acc:      "#6366F1", // Primary Indigo accent
-  accLight: "#818CF8", // Light Indigo
-  violet:   "#8B5CF6", // Purple accent
-  cyan:     "#38BDF8", // Cyan highlight
-  gold:     "#F59E0B", // Warm gold for status
+  bg:       "#0A0E17", // Soothing midnight obsidian slate
+  sur:      "#121824", // Surface card background
+  surHover: "#1A2234", // Hover surface background
+  bor:      "#1F293D", // Border color
+  borLight: "#2D3B56", // Highlight border
+  acc:      "#10B981", // Soothing Emerald Teal accent
+  accLight: "#34D399", // Light Mint Emerald
+  violet:   "#A78BFA", // Soft Lavender highlight
+  cyan:     "#38BDF8", // Soothing Cyan highlight
+  gold:     "#F59E0B", // Warm Amber for status
   t1:       "#F8FAFC", // Headings & high-emphasis text (Ultra crisp)
   t2:       "#CBD5E1", // Body text (Slate 300 - high contrast)
   t3:       "#94A3B8", // Muted text & labels (Slate 400 - clean readability)
@@ -168,7 +168,7 @@ function HeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 140)})`;
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - dist / 140)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -187,7 +187,7 @@ function HeroCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(129, 140, 248, ${p.alpha})`;
+        ctx.fillStyle = `rgba(52, 211, 153, ${p.alpha})`;
         ctx.shadowBlur = 8;
         ctx.shadowColor = C.acc;
         ctx.fill();
@@ -212,7 +212,7 @@ function HeroCanvas() {
         inset: 0,
         pointerEvents: "none",
         zIndex: 0,
-        opacity: 0.7,
+        opacity: 0.65,
       }}
     />
   );
@@ -403,10 +403,10 @@ function SectionHeader({ number, title, sub }) {
               fontWeight: 800,
               color: C.accLight,
               letterSpacing: 1.5,
-              background: "rgba(99, 102, 241, 0.12)",
+              background: "rgba(16, 185, 129, 0.12)",
               padding: "4px 10px",
               borderRadius: 6,
-              border: `1px solid rgba(99, 102, 241, 0.25)`,
+              border: `1px solid rgba(16, 185, 129, 0.25)`,
             }}
           >
             {number}
@@ -428,7 +428,7 @@ function SectionHeader({ number, title, sub }) {
           style={{
             flex: 1,
             height: 1,
-            background: `linear-gradient(90deg, ${C.borLight} 0%, rgba(30, 38, 64, 0.2) 100%)`,
+            background: `linear-gradient(90deg, ${C.borLight} 0%, rgba(31, 41, 61, 0.2) 100%)`,
           }}
         />
         {sub && (
@@ -456,6 +456,7 @@ export default function Portfolio() {
   const [expandedProj, setExpandedProj] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState("ALL");
+  const [profileTab, setProfileTab] = useState("EDUCATION");
 
   /* Typewriter Loop */
   useEffect(() => {
@@ -505,7 +506,7 @@ export default function Portfolio() {
 
   const pageWrapperStyle = {
     padding: "0 48px",
-    maxWidth: 1120,
+    maxWidth: 1160,
     margin: "0 auto",
     position: "relative",
     zIndex: 1,
@@ -552,14 +553,9 @@ export default function Portfolio() {
           50% { opacity: 0; }
         }
 
-        @keyframes subtlePulse {
-          0%, 100% { transform: scale(1); opacity: 0.9; }
-          50% { transform: scale(1.06); opacity: 1; }
-        }
-
         @keyframes timelinePulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-          50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+          50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
         }
 
         .caret {
@@ -581,7 +577,7 @@ export default function Portfolio() {
           color: ${C.t2};
           padding: 8px 16px;
           border-radius: 20px;
-          transition: all 0.2s ease;
+          transition: all 0.25s ease;
         }
         .nav-link:hover {
           color: ${C.t1};
@@ -589,26 +585,26 @@ export default function Portfolio() {
           transform: translateY(-1px);
         }
 
-        /* Buttons */
+        /* Buttons with unique animations */
         .primary-btn {
-          background: linear-gradient(135deg, ${C.acc} 0%, ${C.violet} 100%);
+          background: linear-gradient(135deg, ${C.acc} 0%, ${C.accLight} 100%);
           border: none;
-          color: #ffffff;
-          font-weight: 700;
+          color: #090D16;
+          font-weight: 800;
           font-size: 14.5px;
           padding: 13px 30px;
           border-radius: 8px;
           cursor: pointer;
           font-family: inherit;
-          box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           display: inline-flex;
           align-items: center;
           gap: 8px;
         }
         .primary-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 28px rgba(99, 102, 241, 0.55);
+          transform: translateY(-3px) scale(1.02);
+          box-shadow: 0 8px 30px rgba(16, 185, 129, 0.55);
         }
 
         .secondary-btn {
@@ -621,13 +617,14 @@ export default function Portfolio() {
           border-radius: 8px;
           cursor: pointer;
           font-family: inherit;
-          transition: all 0.25s ease;
+          transition: all 0.3s ease;
         }
         .secondary-btn:hover {
           border-color: ${C.accLight};
           color: ${C.accLight};
           background: ${C.surHover};
           transform: translateY(-2px);
+          box-shadow: 0 4px 18px rgba(52, 211, 153, 0.2);
         }
 
         /* Project Card Hover */
@@ -658,20 +655,16 @@ export default function Portfolio() {
           transition: all 0.2s ease;
         }
         .tab-pill.active, .tab-pill:hover {
-          background: rgba(99, 102, 241, 0.15);
+          background: rgba(16, 185, 129, 0.15);
           border-color: ${C.acc};
           color: ${C.t1};
         }
 
         /* Responsive Layouts */
-        @media (max-width: 768px) {
-          .nav-container {
-            grid-template-columns: 1fr auto !important;
-            padding: 14px 20px !important;
-          }
-          .nav-center-menu {
-            display: none !important;
-          }
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .nav-container { grid-template-columns: 1fr auto !important; padding: 14px 20px !important; }
+          .nav-center-menu { display: none !important; }
           .hero-pad { padding: 40px 20px 60px !important; }
           .sec-pad { padding-left: 20px !important; padding-right: 20px !important; }
           .grid-2 { grid-template-columns: 1fr !important; gap: 30px !important; }
@@ -695,7 +688,7 @@ export default function Portfolio() {
           position: "sticky",
           top: 0,
           zIndex: 100,
-          background: isScrolled ? "rgba(7, 9, 19, 0.88)" : "transparent",
+          background: isScrolled ? "rgba(9, 13, 22, 0.9)" : "transparent",
           backdropFilter: isScrolled ? "blur(16px)" : "none",
           borderBottom: isScrolled ? `1px solid ${C.bor}` : "1px solid transparent",
           transition: "all 0.3s ease",
@@ -717,14 +710,14 @@ export default function Portfolio() {
               width: 38,
               height: 38,
               borderRadius: 10,
-              background: `linear-gradient(135deg, ${C.acc} 0%, ${C.violet} 100%)`,
+              background: `linear-gradient(135deg, ${C.acc} 0%, ${C.accLight} 100%)`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontWeight: 800,
               fontSize: 16,
-              color: "#ffffff",
-              boxShadow: "0 0 16px rgba(99, 102, 241, 0.4)",
+              color: "#090D16",
+              boxShadow: "0 0 16px rgba(16, 185, 129, 0.4)",
               fontFamily: "'Syne', sans-serif",
             }}
           >
@@ -756,7 +749,7 @@ export default function Portfolio() {
             gap: 12,
             alignItems: "center",
             justifySelf: "center",
-            background: "rgba(15, 20, 36, 0.6)",
+            background: "rgba(18, 24, 36, 0.75)",
             padding: "4px 8px",
             borderRadius: 30,
             border: `1px solid ${C.bor}`,
@@ -766,6 +759,7 @@ export default function Portfolio() {
             { label: "Experience", id: "work" },
             { label: "Projects", id: "projects" },
             { label: "Stack", id: "stack" },
+            { label: "About", id: "about" },
             { label: "Contact", id: "contact" },
           ].map((item) => (
             <button
@@ -795,7 +789,7 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* ─── 1. HERO SECTION ──────────────────────────────────────────────────── */}
+      {/* ─── 1. HERO SECTION WITH INTEGRATED PHOTO ────────────────────────────── */}
       <section
         id="hero"
         className="hero-pad"
@@ -803,94 +797,172 @@ export default function Portfolio() {
           ...pageWrapperStyle,
           minHeight: "88vh",
           display: "flex",
-          alignItems: "center",
+          flexDirection: "column",
+          justifyContent: "center",
           padding: "50px 48px 80px",
         }}
       >
         <div style={{ width: "100%" }}>
-          {/* Large Name Header with Tight Syne Line-Height */}
-          <div style={{ marginBottom: 18, overflow: "visible" }}>
-            <h1
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: "clamp(54px, 9vw, 104px)",
-                fontWeight: 800,
-                letterSpacing: "-2.5px",
-                lineHeight: 1.02,
-                color: C.t1,
-              }}
-            >
-              <Hero3DLetters text="Abhayraj" delay={100} />
-              <br />
-              <Hero3DLetters text="Singh" delay={450} isGradient={true} />
-            </h1>
-          </div>
-
-          {/* Role Typewriter Subtitle */}
+          {/* Main Hero 2-Column Grid (Name & Bio Left, Creative Photo Right) */}
           <div
+            className="hero-grid"
             style={{
-              display: "flex",
+              display: "grid",
+              gridTemplateColumns: "1.15fr 0.85fr",
+              gap: 48,
               alignItems: "center",
-              gap: 14,
-              marginBottom: 24,
+              marginBottom: 56,
             }}
           >
-            <div
-              style={{
-                width: 32,
-                height: 2,
-                background: `linear-gradient(90deg, ${C.acc}, ${C.violet})`,
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                fontSize: "clamp(16px, 2.2vw, 22px)",
-                fontWeight: 600,
-                color: C.t2,
-                letterSpacing: "-0.2px",
-              }}
-            >
-              {typedText}
-              <span className="caret">|</span>
-            </span>
+            {/* Left Column: Name, Role, Bio, CTAs */}
+            <div>
+              <div style={{ marginBottom: 18, overflow: "visible" }}>
+                <h1
+                  style={{
+                    fontFamily: "'Syne', sans-serif",
+                    fontSize: "clamp(48px, 7.5vw, 92px)",
+                    fontWeight: 800,
+                    letterSpacing: "-2.5px",
+                    lineHeight: 1.02,
+                    color: C.t1,
+                  }}
+                >
+                  <Hero3DLetters text="Abhayraj" delay={100} />
+                  <br />
+                  <Hero3DLetters text="Singh" delay={450} isGradient={true} />
+                </h1>
+              </div>
+
+              {/* Role Typewriter Subtitle */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  marginBottom: 24,
+                }}
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 2,
+                    background: `linear-gradient(90deg, ${C.acc}, ${C.accLight})`,
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: "clamp(16px, 2.2vw, 22px)",
+                    fontWeight: 600,
+                    color: C.t2,
+                    letterSpacing: "-0.2px",
+                  }}
+                >
+                  {typedText}
+                  <span className="caret">|</span>
+                </span>
+              </div>
+
+              {/* Bio Paragraph */}
+              <p
+                style={{
+                  fontSize: 16.5,
+                  color: C.t2,
+                  lineHeight: 1.8,
+                  maxWidth: 540,
+                  marginBottom: 36,
+                }}
+              >
+                Building production-grade AI systems, RAG pipelines, and agentic workflows at{" "}
+                <strong style={{ color: C.t1, fontWeight: 700 }}>Reliance Jio</strong>. Sole creator of{" "}
+                <strong style={{ color: C.t1, fontWeight: 700 }}>two live client platforms</strong> in daily commercial use.
+                B.Tech Computer Engineering (Graduation 2028).
+              </p>
+
+              {/* Call to Actions */}
+              <div
+                style={{
+                  display: "flex",
+                  gap: 16,
+                  flexWrap: "wrap",
+                }}
+              >
+                <button className="primary-btn" onClick={() => scrollTo("projects")}>
+                  Explore Production Projects
+                  <span style={{ fontSize: 16 }}>→</span>
+                </button>
+                <button className="secondary-btn" onClick={() => scrollTo("contact")}>
+                  Get In Touch
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column: Hero Photo Spotlight Card (Clean Bright Photo, No Overlays!) */}
+            <RevealMotion motionType="scaleUp" delay={250}>
+              <div
+                style={{
+                  background: C.sur,
+                  border: `1px solid ${C.borLight}`,
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  boxShadow: "0 20px 50px rgba(0, 0, 0, 0.45)",
+                  transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+              >
+                {/* Photo container (clean, bright, natural visibility) */}
+                <div style={{ position: "relative", width: "100%", maxHeight: 440, overflow: "hidden" }}>
+                  <img
+                    src="/abhayraj-jio.jpg"
+                    alt="Abhayraj Singh at Reliance Jio"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      maxHeight: 440,
+                      objectFit: "cover",
+                      objectPosition: "center 25%",
+                      display: "block",
+                    }}
+                  />
+                </div>
+
+                {/* Bottom Label Banner */}
+                <div
+                  style={{
+                    padding: "16px 20px",
+                    background: C.sur,
+                    borderTop: `1px solid ${C.bor}`,
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 16, fontWeight: 800, color: C.t1 }}>
+                      Abhayraj Singh
+                    </div>
+                    <div style={{ fontSize: 12.5, color: C.accLight, fontWeight: 600, marginTop: 2 }}>
+                      AI Software Engineer @ Reliance Jio
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 11.5,
+                      fontWeight: 700,
+                      color: C.t3,
+                      background: C.bg,
+                      padding: "5px 10px",
+                      borderRadius: 6,
+                      border: `1px solid ${C.bor}`,
+                    }}
+                  >
+                    Graduation 2028
+                  </div>
+                </div>
+              </div>
+            </RevealMotion>
           </div>
 
-          {/* High Readability Paragraph */}
-          <p
-            style={{
-              fontSize: 16.5,
-              color: C.t2,
-              lineHeight: 1.8,
-              maxWidth: 580,
-              marginBottom: 36,
-            }}
-          >
-            Building production-grade AI systems, RAG pipelines, and agentic workflows at{" "}
-            <strong style={{ color: C.t1, fontWeight: 700 }}>Reliance Jio</strong>. Sole creator of{" "}
-            <strong style={{ color: C.t1, fontWeight: 700 }}>two live client platforms</strong> in daily commercial use.
-            Final-year B.Tech, KJ Somaiya 2027.
-          </p>
-
-          {/* Call to Actions */}
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              flexWrap: "wrap",
-              marginBottom: 64,
-            }}
-          >
-            <button className="primary-btn" onClick={() => scrollTo("projects")}>
-              Explore Production Projects
-              <span style={{ fontSize: 16 }}>→</span>
-            </button>
-            <button className="secondary-btn" onClick={() => scrollTo("contact")}>
-              Get In Touch
-            </button>
-          </div>
-
-          {/* ─── HERO STATS CARDS (Clean Upright Numbers & Equal Box Heights) ───────── */}
+          {/* ─── HERO STATS CARDS ───────────────────────────────────────────── */}
           <div
             className="stat-grid"
             style={{
@@ -953,7 +1025,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ─── 2. EXPERIENCE SECTION (Interactive Holographic Timeline) ─────────── */}
+      {/* ─── 2. EXPERIENCE SECTION ─────────────────────────────────────────── */}
       <section id="work" className="sec-pad" style={{ ...pageWrapperStyle, padding: "96px 48px 0" }}>
         <SectionHeader number="01" title="Work Experience" sub="Production Work Only" />
 
@@ -1013,7 +1085,7 @@ export default function Portfolio() {
                     <div
                       style={{
                         display: "flex",
-                        justify: "space-between",
+                        justifyContent: "space-between",
                         alignItems: "flex-start",
                         flexWrap: "wrap",
                         gap: 12,
@@ -1098,7 +1170,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ─── 3. PROJECTS SECTION (Non-Overlapping Serial Numbers & Glass Drawers) ── */}
+      {/* ─── 3. PROJECTS SECTION ───────────────────────────────────────────── */}
       <section id="projects" className="sec-pad" style={{ ...pageWrapperStyle, padding: "96px 48px 0" }}>
         <SectionHeader number="02" title="Featured Projects" sub="Live Platforms & AI Systems" />
 
@@ -1119,7 +1191,6 @@ export default function Portfolio() {
                     cursor: "pointer",
                   }}
                 >
-                  {/* Clean Non-Overlapping Serial Number Tag */}
                   <div
                     style={{
                       fontFamily: "'Space Grotesk', 'Syne', sans-serif",
@@ -1129,7 +1200,7 @@ export default function Portfolio() {
                       letterSpacing: "-0.5px",
                       userSelect: "none",
                       transition: "color 0.2s ease",
-                      background: "rgba(99, 102, 241, 0.08)",
+                      background: "rgba(16, 185, 129, 0.08)",
                       border: `1px solid ${isExpanded ? C.acc : C.bor}`,
                       padding: "6px 12px",
                       borderRadius: 8,
@@ -1167,10 +1238,10 @@ export default function Portfolio() {
                           padding: "3px 9px",
                           background: proj.act
                             ? "rgba(245, 158, 11, 0.12)"
-                            : "rgba(99, 102, 241, 0.12)",
+                            : "rgba(16, 185, 129, 0.12)",
                           borderRadius: 4,
                           border: `1px solid ${
-                            proj.act ? "rgba(245, 158, 11, 0.3)" : "rgba(99, 102, 241, 0.3)"
+                            proj.act ? "rgba(245, 158, 11, 0.3)" : "rgba(16, 185, 129, 0.3)"
                           }`,
                           letterSpacing: 0.5,
                         }}
@@ -1183,13 +1254,12 @@ export default function Portfolio() {
                     </div>
                   </div>
 
-                  {/* Rotatable Expansion Plus Indicator */}
                   <div
                     style={{
                       width: 32,
                       height: 32,
                       borderRadius: "50%",
-                      background: isExpanded ? "rgba(99, 102, 241, 0.15)" : C.bg,
+                      background: isExpanded ? "rgba(16, 185, 129, 0.15)" : C.bg,
                       border: `1px solid ${isExpanded ? C.acc : C.bor}`,
                       display: "flex",
                       alignItems: "center",
@@ -1205,7 +1275,6 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                {/* Expandable Content Drawer */}
                 <SmoothDrawer isOpen={isExpanded}>
                   <div
                     className="expand-pad"
@@ -1253,11 +1322,10 @@ export default function Portfolio() {
         })}
       </section>
 
-      {/* ─── 4. SKILLS & TECH STACK (Tabbed Categorized Grid) ─────────────────── */}
+      {/* ─── 4. SKILLS & TECH STACK ─────────────────────────────────────────── */}
       <section id="stack" className="sec-pad" style={{ ...pageWrapperStyle, padding: "96px 48px 0" }}>
         <SectionHeader number="03" title="Technical Stack" sub="Production Skills & Frameworks" />
 
-        {/* Skill Category Filter Tabs */}
         <RevealMotion motionType="fadeUp">
           <div
             style={{
@@ -1279,7 +1347,6 @@ export default function Portfolio() {
           </div>
         </RevealMotion>
 
-        {/* Skill Chips Category Cards */}
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           {filteredSkills.map((categoryGroup, idx) => (
             <RevealMotion key={categoryGroup.cat} motionType="scaleUp" delay={idx * 60}>
@@ -1340,7 +1407,175 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ─── 5. CONTACT SECTION (Spacious & Vertically Stacked Details) ───────── */}
+      {/* ─── 5. ABOUT & CREDENTIALS SECTION ─────────────────────────────────── */}
+      <section id="about" className="sec-pad" style={{ ...pageWrapperStyle, padding: "96px 48px 0" }}>
+        <SectionHeader number="04" title="About & Credentials" sub="Personal Background, Education & Certifications" />
+
+        <div style={{ background: C.sur, border: `1px solid ${C.bor}`, borderRadius: 20, padding: "36px 36px" }}>
+          {/* Sub-Header Tabs */}
+          <div style={{ display: "flex", gap: 12, marginBottom: 32, flexWrap: "wrap" }}>
+            {[
+              { id: "EDUCATION", label: "Education & Degree" },
+              { id: "CERTIFICATIONS", label: "Certifications & Awards" },
+              { id: "SPECS", label: "Personal Specifications" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                className={`tab-pill ${profileTab === tab.id ? "active" : ""}`}
+                onClick={() => setProfileTab(tab.id)}
+                style={{ padding: "9px 22px", fontSize: 13 }}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab 1: Education */}
+          {profileTab === "EDUCATION" && (
+            <RevealMotion motionType="fadeUp">
+              <div
+                style={{
+                  background: C.bg,
+                  border: `1px solid ${C.bor}`,
+                  borderRadius: 16,
+                  padding: "28px 32px",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, flexWrap: "wrap" }}>
+                  <div>
+                    <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: 20, fontWeight: 800, color: C.t1 }}>
+                      B.Tech in Computer Engineering
+                    </h3>
+                    <div style={{ fontSize: 15, color: C.accLight, fontWeight: 600, marginTop: 4 }}>
+                      K. J. Somaiya College of Engineering, Mumbai
+                    </div>
+                  </div>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 800,
+                      color: C.gold,
+                      background: "rgba(245, 158, 11, 0.12)",
+                      padding: "6px 14px",
+                      borderRadius: 8,
+                      border: `1px solid rgba(245, 158, 11, 0.35)`,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Graduation 2028
+                  </span>
+                </div>
+                <p style={{ fontSize: 15, color: C.t2, lineHeight: 1.8, marginTop: 16 }}>
+                  Specializing in Artificial Intelligence, Machine Learning, and Enterprise System Architecture. Combining academic rigor with active production software engineering experience at Reliance Jio.
+                </p>
+              </div>
+            </RevealMotion>
+          )}
+
+          {/* Tab 2: Certifications */}
+          {profileTab === "CERTIFICATIONS" && (
+            <RevealMotion motionType="fadeUp">
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16 }}>
+                {[
+                  {
+                    title: "NVIDIA Deep Learning Institute",
+                    sub: "Fundamentals of Deep Learning & Neural Network Architectures",
+                    tag: "NVIDIA DL",
+                  },
+                  {
+                    title: "Microsoft Azure Fundamentals",
+                    sub: "Azure Cloud Architecture (AZ-900 / AI-900)",
+                    tag: "MICROSOFT",
+                  },
+                  {
+                    title: "Reliance Jio AI/ML Performance Recognition",
+                    sub: "Recognized for building production RAG & Agentic AI MCP Framework",
+                    tag: "RELIANCE JIO",
+                  },
+                  {
+                    title: "Production Hospitality Platform Delivery",
+                    sub: "Sole developer of 3 live client applications in active commercial use",
+                    tag: "CLIENT PROD",
+                  },
+                ].map((cert, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: C.bg,
+                      border: `1px solid ${C.bor}`,
+                      borderRadius: 14,
+                      padding: "20px 24px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: 16,
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: 15.5, fontWeight: 700, color: C.t1 }}>{cert.title}</div>
+                      <div style={{ fontSize: 13, color: C.t3, marginTop: 4 }}>{cert.sub}</div>
+                    </div>
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 800,
+                        color: C.accLight,
+                        background: "rgba(16, 185, 129, 0.12)",
+                        padding: "5px 12px",
+                        borderRadius: 6,
+                        border: `1px solid rgba(16, 185, 129, 0.3)`,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {cert.tag}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </RevealMotion>
+          )}
+
+          {/* Tab 3: Personal Specs (Clean Aligned Headers & Values) */}
+          {profileTab === "SPECS" && (
+            <RevealMotion motionType="fadeUp">
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {[
+                  { label: "FULL NAME", val: "Abhayraj Singh" },
+                  { label: "CURRENT ROLE", val: "AI/ML Engineering Intern @ Reliance Jio" },
+                  { label: "DEGREE & COLLEGE", val: "B.Tech Computer Engineering · K. J. Somaiya College of Engineering, Mumbai" },
+                  { label: "GRADUATION YEAR", val: "2028" },
+                  { label: "LOCATION", val: "Navi Mumbai & Mumbai, Maharashtra, India" },
+                  { label: "LANGUAGES", val: "English (Fluent), Hindi (Native), Marathi" },
+                  { label: "WORK NOTICE PERIOD", val: "Immediate (Zero Notice Period)" },
+                ].map((spec, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: C.bg,
+                      border: `1px solid ${C.bor}`,
+                      borderRadius: 12,
+                      padding: "16px 24px",
+                      display: "grid",
+                      gridTemplateColumns: "220px 1fr",
+                      alignItems: "center",
+                      gap: 24,
+                    }}
+                  >
+                    <span style={{ fontSize: 12, fontWeight: 800, color: C.accLight, letterSpacing: 1.2, textTransform: "uppercase" }}>
+                      {spec.label}
+                    </span>
+                    <span style={{ fontSize: 15, fontWeight: 600, color: C.t1 }}>
+                      {spec.val}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </RevealMotion>
+          )}
+        </div>
+      </section>
+
+      {/* ─── 6. CONTACT SECTION ─────────────────────────────────────────────── */}
       <section id="contact" className="sec-pad" style={{ ...pageWrapperStyle, padding: "100px 48px 100px" }}>
         <div style={{ borderTop: `1px solid ${C.bor}`, paddingTop: 80 }}>
           <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
@@ -1488,13 +1723,13 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ─── 6. FOOTER ───────────────────────────────────────────────────────── */}
+      {/* ─── 7. FOOTER ───────────────────────────────────────────────────────── */}
       <footer
         style={{
           padding: "32px 48px",
           borderTop: `1px solid ${C.bor}`,
           display: "flex",
-          justifyContent: "space-between",
+          justify: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
           gap: 20,
